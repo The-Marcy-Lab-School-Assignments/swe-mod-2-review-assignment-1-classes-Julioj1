@@ -3,10 +3,52 @@
 
 class Player {
 
+    constructor(name, position, jerseyNumber){
+        this.name = name;
+        this.position = position;
+        this.jerseyNumber = jerseyNumber;
+    }
 }
 
 class Team {
 
+    #starters = [];
+    #bench = [];
+
+    constructor(name){
+        this.name = name;
+    }
+    
+    get starters(){
+        return this.#starters;
+    }
+    get bench(){
+        return this.#bench;
+    }
+    addBenchPlayer(player){
+        this.#bench.push(player);
+    }
+    getPlayerCount(){
+        return this.#bench.length + this.#starters.length;
+    }
+    moveToBench(name){
+        const index = this.#starters.findIndex((player) => player.name === name);
+            if(index !== -1){
+                const removedPlayer = this.#starters.splice(index, 1)[0];
+                this.#bench.push(removedPlayer);
+                return true;
+            }
+            return false;
+    }
+    moveToStarters(name){
+        const index = this.#bench.findIndex((player) => player.name === name);
+        if(index !== -1){
+            const removedPlayer = this.#bench.splice(index, 1)[0];
+            this.#starters.push(removedPlayer);
+            return true;
+        }
+        return false;
+    }
 }
 
 module.exports = { Player, Team };
