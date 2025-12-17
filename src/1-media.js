@@ -43,8 +43,16 @@ class Podcast extends MediaItem{
     }
 }
 
-class Audiobook {
+class Audiobook extends MediaItem{
+    constructor(title, duration, author, narrator){
+        super(title, duration)
+        this.author = author;
+        this.narrator = narrator;
+    }
 
+    play(){
+        return `${super.play()} by ${this.author}, narrated by ${this.narrator}`;
+    }
 }
 
 const test = () => {
