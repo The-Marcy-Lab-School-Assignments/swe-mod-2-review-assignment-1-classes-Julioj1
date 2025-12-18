@@ -2,18 +2,57 @@
 // Implement your MediaItem, Song, Podcast, and Audiobook classes below
 class MediaItem {
 
+    constructor(title, duration){
+        this.title = title;
+        this.duration = duration;
+    }
+
+    play(){
+        return `Playing: ${this.title}`;
+    }
+    getFormattedDuration(){
+    const minutes = Math.floor(this.duration / 60);
+    const seconds = Math.floor(this.duration % 60);
+        if(seconds < 10){
+            return `${minutes}:0${seconds}`;
+        }
+        return `${minutes}:${seconds}`;
+    }
 }
 
-class Song {
+class Song extends MediaItem{
+    constructor(title, duration, artist){
+        super(title, duration)
+        this.artist = artist;
+    }
 
+    play(){
+        return `${super.play()} by ${this.artist}`
+    }
 }
 
-class Podcast {
+class Podcast extends MediaItem{
+    constructor(title, duration, host, episodeNumber){
+        super(title, duration)
+        this.host = host;
+        this.episodeNumber = episodeNumber;
+    }
 
+    play(){
+        return`${super.play()} with host ${this.host}, Episode ${this.episodeNumber}`
+    }
 }
 
-class Audiobook {
+class Audiobook extends MediaItem{
+    constructor(title, duration, author, narrator){
+        super(title, duration)
+        this.author = author;
+        this.narrator = narrator;
+    }
 
+    play(){
+        return `${super.play()} by ${this.author}, narrated by ${this.narrator}`;
+    }
 }
 
 const test = () => {
